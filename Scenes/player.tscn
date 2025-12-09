@@ -1,0 +1,33 @@
+[gd_scene load_steps=6 format=3 uid="uid://b3aqca0hyv0h6"]
+
+[ext_resource type="Script" uid="uid://c82in361thc3n" path="res://Scripts/player.gd" id="1_v0iea"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_f60y1"]
+size = Vector2(57, 56)
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_v0iea"]
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_cvnsp"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_v0iea"]
+size = Vector2(26, 56)
+
+[node name="Player" type="CharacterBody2D" groups=["player"]]
+script = ExtResource("1_v0iea")
+
+[node name="PlayerCollisionShape" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_f60y1")
+
+[node name="PlayerSprite" type="Sprite2D" parent="."]
+material = SubResource("CanvasItemMaterial_v0iea")
+position = Vector2(1.1920929e-07, 5.684342e-14)
+scale = Vector2(55, 55)
+texture = SubResource("CanvasTexture_cvnsp")
+
+[node name="PlayerCamera" type="Camera2D" parent="."]
+
+[node name="AttackArea" type="Area2D" parent="."]
+
+[node name="AttackCollision" type="CollisionShape2D" parent="AttackArea"]
+position = Vector2(40, 0)
+shape = SubResource("RectangleShape2D_v0iea")

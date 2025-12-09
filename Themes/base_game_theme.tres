@@ -1,0 +1,10 @@
+[gd_resource type="Theme" load_steps=3 format=3 uid="uid://csjc0hy4ae4h5"]
+
+[ext_resource type="FontFile" uid="uid://dd0bawxcra4ho" path="res://Fonts/FreePixel.ttf" id="1_vsjls"]
+[ext_resource type="FontFile" uid="uid://c6ocwx5gjc3o5" path="res://Fonts/CaviarDreams.ttf" id="2_a4cu4"]
+
+[resource]
+default_font = ExtResource("2_a4cu4")
+default_font_size = 16
+Button/fonts/font = ExtResource("1_vsjls")
+Label/fonts/font = ExtResource("1_vsjls")

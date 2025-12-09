@@ -1,0 +1,32 @@
+[gd_scene load_steps=7 format=3 uid="uid://b7f4hrwusfhag"]
+
+[ext_resource type="Texture2D" uid="uid://cbkfkorpvcba0" path="res://Assets/HealthBarUnder.png" id="1_4o665"]
+[ext_resource type="Script" uid="uid://bvkay7ox7nij3" path="res://Scripts/meele_enemy.gd" id="1_tq82f"]
+[ext_resource type="Texture2D" uid="uid://ddad3inlqrqo" path="res://Assets/HealthBarOver.png" id="2_tq82f"]
+[ext_resource type="Texture2D" uid="uid://cl0efvnmww8sh" path="res://Assets/HealthBarProgress.png" id="3_xuf4y"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3s05b"]
+size = Vector2(56, 56)
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_dmhu1"]
+
+[node name="MeeleEnemy" type="CharacterBody2D" groups=["enemy"]]
+script = ExtResource("1_tq82f")
+
+[node name="MeeleEnemyCollisionShape" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_3s05b")
+
+[node name="MeeleEnemySprite" type="Sprite2D" parent="."]
+position = Vector2(0, -4.7683716e-07)
+scale = Vector2(55, 55)
+texture = SubResource("CanvasTexture_dmhu1")
+
+[node name="HealthBar" type="TextureProgressBar" parent="."]
+offset_left = -32.0
+offset_top = -45.0
+offset_right = 32.0
+offset_bottom = -33.0
+texture_under = ExtResource("1_4o665")
+texture_over = ExtResource("2_tq82f")
+texture_progress = ExtResource("3_xuf4y")
+texture_progress_offset = Vector2(1, 0)

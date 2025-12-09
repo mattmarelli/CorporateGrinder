@@ -1,0 +1,166 @@
+[gd_scene load_steps=6 format=3 uid="uid://c0a7j553ux1og"]
+
+[ext_resource type="Script" uid="uid://d1nqq6vihs31l" path="res://Scripts/landing_page.gd" id="1_myqwc"]
+[ext_resource type="Theme" uid="uid://csjc0hy4ae4h5" path="res://Themes/base_game_theme.tres" id="2_ah5yj"]
+[ext_resource type="Texture2D" uid="uid://ky2ptm5h8w7a" path="res://Assets/Laborer_Man.png" id="3_1hju2"]
+[ext_resource type="Texture2D" uid="uid://ck42te7xsof74" path="res://Assets/Manager_Man.png" id="4_tbwr8"]
+[ext_resource type="Texture2D" uid="uid://css80otvfr38j" path="res://Assets/CEO_Man.png" id="5_g0f3k"]
+
+[node name="LandingPage" type="Node2D"]
+script = ExtResource("1_myqwc")
+
+[node name="BaseCanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="GameTitleLabel" type="Label" parent="BaseCanvasLayer"]
+offset_left = 376.0
+offset_top = 55.0
+offset_right = 1532.0
+offset_bottom = 251.0
+theme_override_font_sizes/font_size = 100
+text = "Corporate Grinder"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="StartGameButton" type="Button" parent="BaseCanvasLayer"]
+offset_left = 860.0
+offset_top = 405.0
+offset_right = 1060.0
+offset_bottom = 469.0
+theme = ExtResource("2_ah5yj")
+text = "Start Game"
+
+[node name="CreateCharacterButton" type="Button" parent="BaseCanvasLayer"]
+offset_left = 860.0
+offset_top = 525.0
+offset_right = 1060.0
+offset_bottom = 589.0
+theme = ExtResource("2_ah5yj")
+text = "Create Character
+"
+autowrap_mode = 2
+
+[node name="CreateCharacterCanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="CreateCharacterPanelContainer" type="PanelContainer" parent="CreateCharacterCanvasLayer"]
+offset_left = 97.0
+offset_top = 352.0
+offset_right = 681.0
+offset_bottom = 675.0
+
+[node name="MarginContainer" type="MarginContainer" parent="CreateCharacterCanvasLayer/CreateCharacterPanelContainer"]
+custom_minimum_size = Vector2(10, 10)
+layout_mode = 2
+theme_override_constants/margin_top = 6
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CreateCharacterCanvasLayer/CreateCharacterPanelContainer/MarginContainer"]
+layout_mode = 2
+
+[node name="CreateCharacterGridContainer" type="GridContainer" parent="CreateCharacterCanvasLayer/CreateCharacterPanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+columns = 3
+
+[node name="LaborerTextureRect" type="TextureRect" parent="CreateCharacterCanvasLayer/CreateCharacterPanelContainer/MarginContainer/VBoxContainer/CreateCharacterGridContainer"]
+custom_minimum_size = Vector2(192, 192)
+layout_mode = 2
+texture = ExtResource("3_1hju2")
+stretch_mode = 5
+
+[node name="ManagerTextureRect" type="TextureRect" parent="CreateCharacterCanvasLayer/CreateCharacterPanelContainer/MarginContainer/VBoxContainer/CreateCharacterGridContainer"]
+custom_minimum_size = Vector2(192, 192)
+layout_mode = 2
+texture = ExtResource("4_tbwr8")
+stretch_mode = 5
+
+[node name="ExecutiveTextureRect" type="TextureRect" parent="CreateCharacterCanvasLayer/CreateCharacterPanelContainer/MarginContainer/VBoxContainer/CreateCharacterGridContainer"]
+custom_minimum_size = Vector2(192, 192)
+layout_mode = 2
+texture = ExtResource("5_g0f3k")
+stretch_mode = 5
+
+[node name="SelectLaborerButton" type="Button" parent="CreateCharacterCanvasLayer/CreateCharacterPanelContainer/MarginContainer/VBoxContainer/CreateCharacterGridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("2_ah5yj")
+text = "Laborer"
+
+[node name="SelectManagerButton" type="Button" parent="CreateCharacterCanvasLayer/CreateCharacterPanelContainer/MarginContainer/VBoxContainer/CreateCharacterGridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("2_ah5yj")
+text = "Manager"
+
+[node name="SelectExecutiveButton" type="Button" parent="CreateCharacterCanvasLayer/CreateCharacterPanelContainer/MarginContainer/VBoxContainer/CreateCharacterGridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("2_ah5yj")
+text = "Exeuctive"
+
+[node name="ShowCharacterStatsPanelContainer" type="PanelContainer" parent="CreateCharacterCanvasLayer/CreateCharacterPanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CreateCharacterCanvasLayer/CreateCharacterPanelContainer/MarginContainer/VBoxContainer/ShowCharacterStatsPanelContainer"]
+layout_mode = 2
+
+[node name="CharacterDescriptionLabel" type="Label" parent="CreateCharacterCanvasLayer/CreateCharacterPanelContainer/MarginContainer/VBoxContainer/ShowCharacterStatsPanelContainer/VBoxContainer"]
+custom_minimum_size = Vector2(100, 10)
+layout_mode = 2
+autowrap_mode = 2
+
+[node name="CreateCharacterNameLineEdit" type="LineEdit" parent="CreateCharacterCanvasLayer/CreateCharacterPanelContainer/MarginContainer/VBoxContainer/ShowCharacterStatsPanelContainer/VBoxContainer"]
+layout_mode = 2
+placeholder_text = "Character Name"
+alignment = 1
+
+[node name="FinalCreateCharacterButton" type="Button" parent="CreateCharacterCanvasLayer/CreateCharacterPanelContainer/MarginContainer/VBoxContainer/ShowCharacterStatsPanelContainer/VBoxContainer"]
+layout_mode = 2
+text = "Create Character"
+
+[node name="CancelCreateCharacterButton" type="Button" parent="CreateCharacterCanvasLayer/CreateCharacterPanelContainer/MarginContainer/VBoxContainer/ShowCharacterStatsPanelContainer/VBoxContainer"]
+layout_mode = 2
+text = "Cancel Create Character"
+
+[node name="SelectCharacterCanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="SelectCharacterPanelContainer" type="PanelContainer" parent="SelectCharacterCanvasLayer"]
+offset_left = 1193.0
+offset_top = 243.0
+offset_right = 1919.0
+offset_bottom = 1078.0
+
+[node name="SelectCharacterVBoxContainer" type="VBoxContainer" parent="SelectCharacterCanvasLayer/SelectCharacterPanelContainer"]
+layout_mode = 2
+
+[node name="SelectCharacterHeader" type="Label" parent="SelectCharacterCanvasLayer/SelectCharacterPanelContainer/SelectCharacterVBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 48
+text = "Select Character"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SelectCharacterOneButton" type="Button" parent="SelectCharacterCanvasLayer/SelectCharacterPanelContainer/SelectCharacterVBoxContainer"]
+layout_mode = 2
+autowrap_mode = 1
+
+[node name="SelectCharacterTwoButton" type="Button" parent="SelectCharacterCanvasLayer/SelectCharacterPanelContainer/SelectCharacterVBoxContainer"]
+layout_mode = 2
+autowrap_mode = 1
+
+[node name="SelectCharacterThreeButton" type="Button" parent="SelectCharacterCanvasLayer/SelectCharacterPanelContainer/SelectCharacterVBoxContainer"]
+layout_mode = 2
+autowrap_mode = 1
+
+[node name="SelectCharacterFourButton" type="Button" parent="SelectCharacterCanvasLayer/SelectCharacterPanelContainer/SelectCharacterVBoxContainer"]
+layout_mode = 2
+autowrap_mode = 1
+
+[node name="SelectCharacterFiveButton" type="Button" parent="SelectCharacterCanvasLayer/SelectCharacterPanelContainer/SelectCharacterVBoxContainer"]
+layout_mode = 2
+autowrap_mode = 1
+
+[connection signal="button_down" from="BaseCanvasLayer/StartGameButton" to="." method="start_game"]
+[connection signal="button_down" from="BaseCanvasLayer/CreateCharacterButton" to="." method="show_create_character_layer"]
+[connection signal="button_down" from="CreateCharacterCanvasLayer/CreateCharacterPanelContainer/MarginContainer/VBoxContainer/CreateCharacterGridContainer/SelectLaborerButton" to="." method="select_laborer"]
+[connection signal="button_down" from="CreateCharacterCanvasLayer/CreateCharacterPanelContainer/MarginContainer/VBoxContainer/CreateCharacterGridContainer/SelectManagerButton" to="." method="select_manager"]
+[connection signal="button_down" from="CreateCharacterCanvasLayer/CreateCharacterPanelContainer/MarginContainer/VBoxContainer/CreateCharacterGridContainer/SelectExecutiveButton" to="." method="select_executive"]
+[connection signal="button_down" from="CreateCharacterCanvasLayer/CreateCharacterPanelContainer/MarginContainer/VBoxContainer/ShowCharacterStatsPanelContainer/VBoxContainer/FinalCreateCharacterButton" to="." method="create_character"]
+[connection signal="button_down" from="CreateCharacterCanvasLayer/CreateCharacterPanelContainer/MarginContainer/VBoxContainer/ShowCharacterStatsPanelContainer/VBoxContainer/CancelCreateCharacterButton" to="." method="cancel_create_character"]
