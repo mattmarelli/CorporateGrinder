@@ -1,16 +1,19 @@
 class_name SaverLoader
 extends Node
 
+
 func save_game():
 	pass
+
 
 func initial_game_save():
 	if not FileAccess.file_exists("user://savegame.tres"):
 		var saved_game = SavedGame.new()
 		ResourceSaver.save(saved_game, "user://savegame.tres")
 
+
 func load_game() -> Array[SavedCharacter]:
-	var saved_game:SavedGame = load("user://savegame.tres")
+	var saved_game: SavedGame = load("user://savegame.tres")
 	var characters = [] as Array[SavedCharacter]
 
 	if saved_game.character_slot_1 != null:
@@ -26,8 +29,9 @@ func load_game() -> Array[SavedCharacter]:
 
 	return characters
 
+
 func save_new_character(character_type, character_name):
-	var saved_game:SavedGame = load("user://savegame.tres")
+	var saved_game: SavedGame = load("user://savegame.tres")
 	var new_character = SavedCharacter.new()
 	new_character.character_type = character_type
 	new_character.character_name = character_name

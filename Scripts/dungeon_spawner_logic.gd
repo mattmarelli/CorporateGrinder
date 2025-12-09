@@ -4,12 +4,14 @@ var enemy_spawner_script = preload("res://Scripts/enemy_spawner.gd")
 var enemy_spawner = null
 var enemy_spawner_timer = Timer.new()
 
+
 func _ready():
 	enemy_spawner = enemy_spawner_script.new()
 	get_tree().root.add_child(enemy_spawner)
 	enemy_spawner_timer.name = "enemy_spawn_timer"
 	get_tree().root.add_child(enemy_spawner_timer)
 	enemy_spawner_timer.timeout.connect(enemy_spawner.spawn_enemies)
+
 
 func create_dungeon_and_set_scene():
 	print("This is being called!")
@@ -24,6 +26,7 @@ func create_dungeon_and_set_scene():
 
 	old_scene.queue_free()
 	start_enemy_spawn()
+
 
 func start_enemy_spawn():
 	print("THIS IS CALLED!!!")
