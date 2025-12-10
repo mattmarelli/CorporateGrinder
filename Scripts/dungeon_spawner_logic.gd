@@ -14,7 +14,6 @@ func _ready():
 
 
 func create_dungeon_and_set_scene():
-	print("This is being called!")
 	var tree = get_tree()
 	var old_scene = tree.current_scene
 	var player = tree.get_root().find_child("player", true, false)

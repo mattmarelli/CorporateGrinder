@@ -179,3 +179,4 @@ text = "Selected Character: "
 [connection signal="button_down" from="CreateCharacterCanvasLayer/CreateCharacterPanelContainer/MarginContainer/VBoxContainer/CreateCharacterGridContainer/SelectExecutiveButton" to="." method="select_executive"]
 [connection signal="button_down" from="CreateCharacterCanvasLayer/CreateCharacterPanelContainer/MarginContainer/VBoxContainer/ShowCharacterStatsPanelContainer/VBoxContainer/FinalCreateCharacterButton" to="." method="create_character"]
 [connection signal="button_down" from="CreateCharacterCanvasLayer/CreateCharacterPanelContainer/MarginContainer/VBoxContainer/ShowCharacterStatsPanelContainer/VBoxContainer/CancelCreateCharacterButton" to="." method="cancel_create_character"]
+[connection signal="button_down" from="SelectCharacterCanvasLayer/SelectCharacterPanelContainer/SelectCharacterVBoxContainer/SelectCharacterOneButton" to="." method="select_character"]

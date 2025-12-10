@@ -25,6 +25,10 @@ var select_character_three_button = $SelectCharacterCanvasLayer/SelectCharacterP
 var select_character_four_button = $SelectCharacterCanvasLayer/SelectCharacterPanelContainer/SelectCharacterVBoxContainer/SelectCharacterFourButton
 @onready
 var select_character_five_button = $SelectCharacterCanvasLayer/SelectCharacterPanelContainer/SelectCharacterVBoxContainer/SelectCharacterFiveButton
+@onready var selected_character_texture_rect = $SelectCharacterCanvasLayer/SelectCharacterPanelContainer/SelectCharacterVBoxContainer/HBoxContainer/SelectedCharacterTextureRect
+@onready var selected_character_label = $SelectCharacterCanvasLayer/SelectCharacterPanelContainer/SelectCharacterVBoxContainer/HBoxContainer/SelectedCharacterLabel
+
+
 
 var main_game_scene = preload("res://Scenes/main_game.tscn")
 var selected_character: SavedCharacter = null
@@ -54,6 +58,17 @@ func set_up_character_select_buttons():
 		character_count += 1
 		set_up_character_select_button(character, character_count)
 
+func get_character_image(character_type):
+	var image = null
+
+	if character_type == "Laborer":
+		image = load("res://Assets/Laborer_Man.png")
+	if character_type == "Manager":
+		image = load("res://Assets/Manager_Man.png")
+	if character_type == "Executive":
+		image = load("res://Assets/CEO_Man.png")
+
+	return image
 
 func set_up_character_select_button(character_save: SavedCharacter, character_slot: int):
 	var button_to_set_up = null
@@ -69,12 +84,7 @@ func set_up_character_select_button(character_save: SavedCharacter, character_sl
 	if character_slot == 5:
 		button_to_set_up = select_character_five_button
 
-	if character_save.character_type == "Laborer":
-		button_to_set_up.icon = load("res://Assets/Laborer_Man.png")
-	if character_save.character_type == "Manager":
-		button_to_set_up.icon = load("res://Assets/Manager_Man.png")
-	if character_save.character_type == "Executive":
-		button_to_set_up.icon = load("res://Assets/CEO_Man.png")
+	button_to_set_up.icon = get_character_image(character_save.character_type)
 
 	button_to_set_up.text = (
 		character_save.character_name
@@ -83,6 +93,8 @@ func set_up_character_select_button(character_save: SavedCharacter, character_sl
 		+ " Level: "
 		+ str(character_save.character_level)
 	)
+	
+	button_to_set_up.pressed.connect(select_character.bind(button_to_set_up))
 	button_to_set_up.show()
 
 
@@ -91,8 +103,15 @@ func show_create_character_layer():
 
 
 func start_game():
+	if selected_character == null:
+		return
 	print("Game is started")
-	get_tree().change_scene_to_packed(main_game_scene)
+	var main_game = main_game_scene.instantiate()
+	main_game.character_save_slot = selected_character_save_spot
+	main_game.character_save = selected_character
+	get_tree().root.add_child(main_game)
+	get_tree().current_scene.queue_free()
+	get_tree().current_scene = main_game
 
 
 func cancel_create_character():
@@ -135,3 +154,24 @@ func create_character():
 
 	characters = saver_loader.load_game()
 	set_up_character_select_buttons()
+
+func select_character(button: Button):
+	if button == select_character_one_button:
+		selected_character = characters[0]
+		selected_character_save_spot = 0
+	elif button == select_character_two_button:
+		selected_character = characters[1]
+		selected_character_save_spot = 1
+	elif button == select_character_three_button:
+		selected_character = characters[2]
+		selected_character_save_spot = 2
+	elif button == select_character_four_button:
+		selected_character = characters[3]
+		selected_character_save_spot = 3
+	elif button == select_character_five_button:
+		selected_character = characters[4]
+		selected_character_save_spot = 4
+
+	var image = get_character_image(selected_character.character_type)
+	selected_character_texture_rect.texture = image
+	selected_character_label.text = "Selected Character: " + selected_character.character_name

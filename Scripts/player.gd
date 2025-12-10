@@ -2,8 +2,10 @@ extends CharacterBody2D
 
 @onready var player_cam = $PlayerCamera
 @onready var attack_area = $AttackArea
+@onready var player_sprite = $PlayerSprite
 @export var speed = 400
 
+var character_type = ""
 var max_zoom = 1.0
 var min_zoom = 0.3
 var camera_zoom_amount = 0.1
@@ -16,7 +18,12 @@ func _ready():
 	player_cam.zoom = Vector2(0.5, 0.5)
 	attack_area.monitoring = false
 	attack_area.body_entered.connect(_on_attack_area_entered)
-
+	if character_type == "Laborer":
+		player_sprite.texture = load("res://Assets/Laborer_Man.png")
+	elif character_type == "Manager":
+		player_sprite.texture = load("res://Assets/Manager_Man.png")
+	elif character_type == "Executive":
+		player_sprite.texture = load("res://Assets/CEO_Man.png")
 
 func get_input():
 	var input_direction = Input.get_vector("left", "right", "up", "down")

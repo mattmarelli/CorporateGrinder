@@ -1,13 +1,14 @@
 [gd_scene load_steps=6 format=3 uid="uid://cwpm5ngonvdf1"]
 
 [ext_resource type="Script" uid="uid://dv1sts3ci0hxk" path="res://Scripts/dungeon_spawner.gd" id="1_dw2up"]
+[ext_resource type="Texture2D" uid="uid://2kgy4w8c2d26" path="res://Assets/DungeonSpawner.png" id="2_a522y"]
 [ext_resource type="Theme" uid="uid://csjc0hy4ae4h5" path="res://Themes/base_game_theme.tres" id="2_sggio"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_e64lc"]
-
-[sub_resource type="CanvasTexture" id="CanvasTexture_dw2up"]
+size = Vector2(48, 48.25)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dw2up"]
+size = Vector2(31.5, 29.5)
 
 [node name="DungeonSpawner" type="Node2D"]
 script = ExtResource("1_dw2up")
@@ -15,16 +16,18 @@ script = ExtResource("1_dw2up")
 [node name="DungeonSpawnerStaticBody" type="StaticBody2D" parent="."]
 
 [node name="DungeonSpawnerStaticCollisionShape" type="CollisionShape2D" parent="DungeonSpawnerStaticBody"]
+position = Vector2(0, -0.5)
 scale = Vector2(4, 4)
 shape = SubResource("RectangleShape2D_e64lc")
 
 [node name="DungeonSpawnerSprite" type="Sprite2D" parent="DungeonSpawnerStaticBody"]
-scale = Vector2(80, 80)
-texture = SubResource("CanvasTexture_dw2up")
+scale = Vector2(3, 3)
+texture = ExtResource("2_a522y")
 
 [node name="InteracableArea" type="Area2D" parent="."]
 
 [node name="InteractableCollisionShape" type="CollisionShape2D" parent="InteracableArea"]
+position = Vector2(1, -4)
 scale = Vector2(8, 8)
 shape = SubResource("RectangleShape2D_dw2up")
 
@@ -34,16 +37,16 @@ shape = SubResource("RectangleShape2D_dw2up")
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -290.0
-offset_bottom = 360.0
+offset_left = -327.0
+offset_bottom = 1080.0
 grow_horizontal = 0
 theme = ExtResource("2_sggio")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="DungeonSpawnerCreateDungeonCanvasLayer/Panel"]
 layout_mode = 0
 offset_top = 1.0
-offset_right = 290.0
-offset_bottom = 360.0
+offset_right = 326.0
+offset_bottom = 1079.0
 
 [node name="CreaterTitle" type="Label" parent="DungeonSpawnerCreateDungeonCanvasLayer/Panel/VBoxContainer"]
 layout_mode = 2
@@ -60,10 +63,10 @@ layout_mode = 2
 text = "Create Dungeon"
 
 [node name="DungeonSpawnerInteractPanelContainer" type="PanelContainer" parent="."]
-offset_left = -60.0
-offset_top = 77.0
-offset_right = 60.0
-offset_bottom = 113.0
+offset_left = -120.0
+offset_top = 122.0
+offset_right = 127.0
+offset_bottom = 172.0
 theme = ExtResource("2_sggio")
 
 [node name="InteractionBoxContainer" type="VBoxContainer" parent="DungeonSpawnerInteractPanelContainer"]
@@ -71,6 +74,7 @@ layout_mode = 2
 
 [node name="TitleLabel" type="Label" parent="DungeonSpawnerInteractPanelContainer/InteractionBoxContainer"]
 layout_mode = 2
+theme_override_font_sizes/font_size = 24
 text = "Dungeon Spawner"
 horizontal_alignment = 1
 
