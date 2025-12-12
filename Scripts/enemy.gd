@@ -34,5 +34,4 @@ func despawn():
 
 
 func update_health_bar():
-	print("UPDATE HEALTH BAR CALLED!!!!")
 	health_bar.value = (self.current_health / self.starting_health) * 100

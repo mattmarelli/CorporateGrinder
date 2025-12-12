@@ -62,11 +62,11 @@ func get_character_image(character_type):
 	var image = null
 
 	if character_type == "Laborer":
-		image = load("res://Assets/Laborer_Man.png")
+		image = load("res://Assets/PlayerModels/Laborer/LaborerMan.png")
 	if character_type == "Manager":
-		image = load("res://Assets/Manager_Man.png")
+		image = load("res://Assets/PlayerModels/Manager/ManagerMan.png")
 	if character_type == "Executive":
-		image = load("res://Assets/CEO_Man.png")
+		image = load("res://Assets/PlayerModels/Executive/ExecutiveMan.png")
 
 	return image
 
@@ -105,7 +105,6 @@ func show_create_character_layer():
 func start_game():
 	if selected_character == null:
 		return
-	print("Game is started")
 	var main_game = main_game_scene.instantiate()
 	main_game.character_save_slot = selected_character_save_spot
 	main_game.character_save = selected_character

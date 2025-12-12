@@ -2,9 +2,9 @@
 
 [ext_resource type="Script" uid="uid://d1nqq6vihs31l" path="res://Scripts/landing_page.gd" id="1_myqwc"]
 [ext_resource type="Theme" uid="uid://csjc0hy4ae4h5" path="res://Themes/base_game_theme.tres" id="2_ah5yj"]
-[ext_resource type="Texture2D" uid="uid://ky2ptm5h8w7a" path="res://Assets/Laborer_Man.png" id="3_1hju2"]
-[ext_resource type="Texture2D" uid="uid://ck42te7xsof74" path="res://Assets/Manager_Man.png" id="4_tbwr8"]
-[ext_resource type="Texture2D" uid="uid://css80otvfr38j" path="res://Assets/CEO_Man.png" id="5_g0f3k"]
+[ext_resource type="Texture2D" uid="uid://ky2ptm5h8w7a" path="res://Assets/PlayerModels/Laborer/LaborerMan.png" id="3_1hju2"]
+[ext_resource type="Texture2D" uid="uid://ck42te7xsof74" path="res://Assets/PlayerModels/Manager/ManagerMan.png" id="4_tbwr8"]
+[ext_resource type="Texture2D" uid="uid://css80otvfr38j" path="res://Assets/PlayerModels/Executive/ExecutiveMan.png" id="5_g0f3k"]
 
 [node name="LandingPage" type="Node2D"]
 script = ExtResource("1_myqwc")

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ck42te7xsof74"
-path="res://.godot/imported/Manager_Man.png-7c103cac9edd4333c85ae0f1dda45811.ctex"
+uid="uid://cty4wh3lysc30"
+path="res://.godot/imported/LaborerManIdle.png-7daa71ce7110cd75f156ee5312e83d49.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Manager_Man.png"
-dest_files=["res://.godot/imported/Manager_Man.png-7c103cac9edd4333c85ae0f1dda45811.ctex"]
+source_file="res://Assets/PlayerModels/Laborer/LaborerManIdle.png"
+dest_files=["res://.godot/imported/LaborerManIdle.png-7daa71ce7110cd75f156ee5312e83d49.ctex"]
 
 [params]
 

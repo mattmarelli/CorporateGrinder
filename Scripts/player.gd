@@ -4,6 +4,7 @@ extends CharacterBody2D
 @onready var attack_area = $AttackArea
 @onready var player_sprite = $PlayerSprite
 @export var speed = 400
+@onready var animated_player_sprite = $AnimatedPlayerSprite
 
 var character_type = ""
 var max_zoom = 1.0
@@ -13,28 +14,49 @@ var camera_zoom_amount = 0.1
 var weapon = null
 var base_damage = 5.0
 
+var idle_animation_string = ""
+var walk_up_animation_string = ""
+var walk_down_animation_string = ""
+var walk_left_animation_string = ""
+var walk_right_animation_string = ""
 
 func _ready():
 	player_cam.zoom = Vector2(0.5, 0.5)
 	attack_area.monitoring = false
 	attack_area.body_entered.connect(_on_attack_area_entered)
-	if character_type == "Laborer":
-		player_sprite.texture = load("res://Assets/Laborer_Man.png")
-	elif character_type == "Manager":
-		player_sprite.texture = load("res://Assets/Manager_Man.png")
-	elif character_type == "Executive":
-		player_sprite.texture = load("res://Assets/CEO_Man.png")
+	idle_animation_string = "idle_" + character_type.to_lower() + "_down"
+	walk_up_animation_string = "walk_up_" + character_type.to_lower() 
+	walk_down_animation_string = "walk_down_" + character_type.to_lower()
+	walk_right_animation_string = "walk_right_" + character_type.to_lower()
+	walk_left_animation_string = "walk_left_" + character_type.to_lower()
+	animated_player_sprite.play(idle_animation_string)
+
 
 func get_input():
 	var input_direction = Input.get_vector("left", "right", "up", "down")
 	velocity = input_direction * speed
 
-	# TODO need to replace this logic with changing the sprite image of the
-	# character.
-	if input_direction != Vector2.ZERO:
-		var target_angle = input_direction.angle()
-		rotation = lerp_angle(rotation, target_angle, 0.15)
+	update_player_sprite_direction(input_direction)
 
+func update_player_sprite_direction(input_direction: Vector2):
+	if input_direction == Vector2.ZERO:
+		animated_player_sprite.play(idle_animation_string)
+		return
+
+	if abs(input_direction.x) > abs(input_direction.y):
+		if input_direction.x > 0:
+			animated_player_sprite.play(walk_right_animation_string)
+			idle_animation_string = "idle_" + character_type.to_lower() + "_right"
+		else:
+			animated_player_sprite.play(walk_left_animation_string)
+			idle_animation_string = "idle_" + character_type.to_lower() + "_left"
+	else:
+		if input_direction.y > 0:
+			animated_player_sprite.play(walk_down_animation_string)
+			idle_animation_string = "idle_" + character_type.to_lower() + "_down"
+		else:
+			animated_player_sprite.play(walk_up_animation_string)
+			idle_animation_string = "idle_" + character_type.to_lower() + "_up"
 
 func _physics_process(_delta):
 	get_input()
