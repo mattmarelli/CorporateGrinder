@@ -2,9 +2,10 @@ extends CharacterBody2D
 
 @onready var player_cam = $PlayerCamera
 @onready var attack_area = $AttackArea
-@onready var player_sprite = $PlayerSprite
 @export var speed = 400
 @onready var animated_player_sprite = $AnimatedPlayerSprite
+@onready var player_collision_shape = $PlayerCollisionShape
+
 
 var character_type = ""
 var max_zoom = 1.0

@@ -62,11 +62,11 @@ func get_character_image(character_type):
 	var image = null
 
 	if character_type == "Laborer":
-		image = load("res://Assets/PlayerModels/Laborer/LaborerMan.png")
+		image = load("res://Assets/PlayerModels/Laborer/LaborerManSkinny.png")
 	if character_type == "Manager":
-		image = load("res://Assets/PlayerModels/Manager/ManagerMan.png")
+		image = load("res://Assets/PlayerModels/Manager/ManagerManSkinny.png")
 	if character_type == "Executive":
-		image = load("res://Assets/PlayerModels/Executive/ExecutiveMan.png")
+		image = load("res://Assets/PlayerModels/Executive/ExecutiveManSkinny.png")
 
 	return image
 
