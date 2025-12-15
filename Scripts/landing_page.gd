@@ -39,6 +39,7 @@ var saver_loader: SaverLoader = null
 
 
 func _ready():
+	print(OS.get_data_dir())
 	saver_loader = SaverLoader.new()
 	create_character_canvas_layer.hide()
 	saver_loader.initial_game_save()

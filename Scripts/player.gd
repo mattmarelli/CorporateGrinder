@@ -1,4 +1,5 @@
 extends CharacterBody2D
+class_name BasePlayer
 
 @onready var player_cam = $PlayerCamera
 @onready var attack_area = $AttackArea
@@ -9,7 +10,7 @@ extends CharacterBody2D
 
 var character_type = ""
 var max_zoom = 1.0
-var min_zoom = 0.3
+var min_zoom = 0.5
 var camera_zoom_amount = 0.1
 
 var weapon = null
@@ -25,11 +26,11 @@ func _ready():
 	player_cam.zoom = Vector2(0.5, 0.5)
 	attack_area.monitoring = false
 	attack_area.body_entered.connect(_on_attack_area_entered)
-	idle_animation_string = "idle_" + character_type.to_lower() + "_down"
-	walk_up_animation_string = "walk_up_" + character_type.to_lower() 
-	walk_down_animation_string = "walk_down_" + character_type.to_lower()
-	walk_right_animation_string = "walk_right_" + character_type.to_lower()
-	walk_left_animation_string = "walk_left_" + character_type.to_lower()
+	idle_animation_string = "idle_down"
+	walk_up_animation_string = "walk_up"
+	walk_down_animation_string = "walk_down"
+	walk_right_animation_string = "walk_right"
+	walk_left_animation_string = "walk_left"
 	animated_player_sprite.play(idle_animation_string)
 
 
@@ -47,17 +48,17 @@ func update_player_sprite_direction(input_direction: Vector2):
 	if abs(input_direction.x) > abs(input_direction.y):
 		if input_direction.x > 0:
 			animated_player_sprite.play(walk_right_animation_string)
-			idle_animation_string = "idle_" + character_type.to_lower() + "_right"
+			idle_animation_string = "idle_right"
 		else:
 			animated_player_sprite.play(walk_left_animation_string)
-			idle_animation_string = "idle_" + character_type.to_lower() + "_left"
+			idle_animation_string = "idle_left"
 	else:
 		if input_direction.y > 0:
 			animated_player_sprite.play(walk_down_animation_string)
-			idle_animation_string = "idle_" + character_type.to_lower() + "_down"
+			idle_animation_string = "idle_down"
 		else:
 			animated_player_sprite.play(walk_up_animation_string)
-			idle_animation_string = "idle_" + character_type.to_lower() + "_up"
+			idle_animation_string = "idle_up"
 
 func _physics_process(_delta):
 	get_input()

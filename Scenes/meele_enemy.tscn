@@ -8,18 +8,19 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3s05b"]
 size = Vector2(56, 56)
 
-[sub_resource type="CanvasTexture" id="CanvasTexture_dmhu1"]
+[sub_resource type="SpriteFrames" id="SpriteFrames_tq82f"]
+animations = [{
+"frames": [],
+"loop": true,
+"name": &"new_animation",
+"speed": 5.0
+}]
 
 [node name="MeeleEnemy" type="CharacterBody2D" groups=["enemy"]]
 script = ExtResource("1_tq82f")
 
 [node name="MeeleEnemyCollisionShape" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_3s05b")
-
-[node name="MeeleEnemySprite" type="Sprite2D" parent="."]
-position = Vector2(0, -4.7683716e-07)
-scale = Vector2(55, 55)
-texture = SubResource("CanvasTexture_dmhu1")
 
 [node name="HealthBar" type="TextureProgressBar" parent="."]
 offset_left = -32.0
@@ -30,3 +31,8 @@ texture_under = ExtResource("1_4o665")
 texture_over = ExtResource("2_tq82f")
 texture_progress = ExtResource("3_xuf4y")
 texture_progress_offset = Vector2(1, 0)
+
+[node name="MeeleEnemyAnimatedSprite" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_tq82f")
+animation = &"new_animation"
+speed_scale = 3.0

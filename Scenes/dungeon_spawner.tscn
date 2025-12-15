@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://cwpm5ngonvdf1"]
 
 [ext_resource type="Script" uid="uid://dv1sts3ci0hxk" path="res://Scripts/dungeon_spawner.gd" id="1_dw2up"]
-[ext_resource type="Texture2D" uid="uid://2kgy4w8c2d26" path="res://Assets/DungeonSpawner.png" id="2_a522y"]
+[ext_resource type="Texture2D" uid="uid://cxn327ciskiuc" path="res://Assets/PlayerModels/MainGame/JobBoard.png" id="2_a522y"]
 [ext_resource type="Theme" uid="uid://csjc0hy4ae4h5" path="res://Themes/base_game_theme.tres" id="2_sggio"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_e64lc"]
@@ -51,7 +51,7 @@ offset_bottom = 1079.0
 [node name="CreaterTitle" type="Label" parent="DungeonSpawnerCreateDungeonCanvasLayer/Panel/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 2
-text = "Dungeon Spawner"
+text = "Job Board"
 horizontal_alignment = 1
 
 [node name="Control" type="Control" parent="DungeonSpawnerCreateDungeonCanvasLayer/Panel/VBoxContainer"]
@@ -60,7 +60,7 @@ size_flags_vertical = 3
 
 [node name="StartDungeonButton" type="Button" parent="DungeonSpawnerCreateDungeonCanvasLayer/Panel/VBoxContainer"]
 layout_mode = 2
-text = "Create Dungeon"
+text = "Start Job"
 
 [node name="DungeonSpawnerInteractPanelContainer" type="PanelContainer" parent="."]
 offset_left = -120.0
@@ -75,7 +75,7 @@ layout_mode = 2
 [node name="TitleLabel" type="Label" parent="DungeonSpawnerInteractPanelContainer/InteractionBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 24
-text = "Dungeon Spawner"
+text = "Job Board"
 horizontal_alignment = 1
 
 [node name="Control" type="Control" parent="DungeonSpawnerInteractPanelContainer/InteractionBoxContainer"]
