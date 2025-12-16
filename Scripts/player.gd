@@ -35,7 +35,12 @@ func _ready():
 
 
 func get_input():
-	var input_direction = Input.get_vector("left", "right", "up", "down")
+	var input_direction = Vector2.ZERO
+	var player_click = Input.is_action_just_pressed("click") or Input.is_action_pressed("click")
+	if player_click:
+		var click_position = get_global_mouse_position()
+		input_direction = (click_position - self.global_position).normalized()
+
 	velocity = input_direction * speed
 
 	update_player_sprite_direction(input_direction)

@@ -24,5 +24,5 @@ func _ready():
 
 	var dungeon_spawner = dungeon_spawner_scene.instantiate()
 
-	dungeon_spawner.position = Vector2(screen_width, 50)
+	dungeon_spawner.position = Vector2(screen_width/2, 50)
 	add_child(dungeon_spawner)
