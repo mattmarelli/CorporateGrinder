@@ -12,6 +12,7 @@ var character_type = ""
 var max_zoom = 1.0
 var min_zoom = 0.5
 var camera_zoom_amount = 0.1
+var walking_to_position = Vector2.ZERO
 
 var weapon = null
 var base_damage = 5.0
@@ -35,11 +36,18 @@ func _ready():
 
 
 func get_input():
+	var distance_from_walking_position = abs(walking_to_position - self.global_position)
+	if distance_from_walking_position < Vector2(3.0, 3.0):
+		walking_to_position = Vector2.ZERO
+
 	var input_direction = Vector2.ZERO
 	var player_click = Input.is_action_just_pressed("click") or Input.is_action_pressed("click")
 	if player_click:
 		var click_position = get_global_mouse_position()
 		input_direction = (click_position - self.global_position).normalized()
+		walking_to_position = click_position
+	elif walking_to_position != Vector2.ZERO:
+		input_direction = (walking_to_position - self.global_position).normalized()
 
 	velocity = input_direction * speed
 
