@@ -993,10 +993,14 @@ shape = SubResource("RectangleShape2D_f60y1")
 [node name="AnimatedPlayerSprite" type="AnimatedSprite2D" parent="."]
 scale = Vector2(2, 2)
 sprite_frames = SubResource("SpriteFrames_6t5aa")
-animation = &"walk_up_manager"
+animation = &"walk_right_laborer"
+frame = 7
 speed_scale = 3.0
 
 [node name="PlayerCamera" type="Camera2D" parent="."]
+
+[node name="RightHandNode" type="Node2D" parent="."]
+position = Vector2(-5, 13)
 
 [node name="AttackArea" type="Area2D" parent="."]
 

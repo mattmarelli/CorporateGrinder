@@ -6,6 +6,7 @@ class_name BasePlayer
 @export var speed = 400
 @onready var animated_player_sprite = $AnimatedPlayerSprite
 @onready var player_collision_shape = $PlayerCollisionShape
+@onready var right_hand_node = $RightHandNode
 
 
 var character_type = ""
@@ -13,6 +14,8 @@ var max_zoom = 1.0
 var min_zoom = 0.5
 var camera_zoom_amount = 0.1
 var walking_to_position = Vector2.ZERO
+var last_position = Vector2.ZERO
+var player_can_move = false
 
 var weapon = null
 var base_damage = 5.0
@@ -22,6 +25,21 @@ var walk_up_animation_string = ""
 var walk_down_animation_string = ""
 var walk_left_animation_string = ""
 var walk_right_animation_string = ""
+
+var idle_right_hand_position = Vector2.ZERO
+
+var right_hand_offsets_facing_sideways = {
+	0: Vector2(3, 13),
+	1: Vector2(10, 13),
+	2: Vector2(21, 13),
+	3: Vector2(10, 13),
+	4: Vector2(3, 13),
+	5: Vector2(-5, 13),
+	6: Vector2(-15, 13),
+	7: Vector2(-5, 13),
+	8: Vector2(3, 13),
+}
+
 
 func _ready():
 	player_cam.zoom = Vector2(0.5, 0.5)
@@ -33,11 +51,17 @@ func _ready():
 	walk_right_animation_string = "walk_right"
 	walk_left_animation_string = "walk_left"
 	animated_player_sprite.play(idle_animation_string)
+	
+	await get_tree().create_timer(0.1).timeout
+	player_can_move = true
 
 
 func get_input():
 	var distance_from_walking_position = abs(walking_to_position - self.global_position)
+	var is_character_blocked_from_moving = abs(last_position - self.global_position) < Vector2(1.0, 1.0)
 	if distance_from_walking_position < Vector2(3.0, 3.0):
+		walking_to_position = Vector2.ZERO
+	elif is_character_blocked_from_moving:
 		walking_to_position = Vector2.ZERO
 
 	var input_direction = Vector2.ZERO
@@ -50,21 +74,24 @@ func get_input():
 		input_direction = (walking_to_position - self.global_position).normalized()
 
 	velocity = input_direction * speed
-
+	last_position = self.global_position
 	update_player_sprite_direction(input_direction)
 
 func update_player_sprite_direction(input_direction: Vector2):
 	if input_direction == Vector2.ZERO:
 		animated_player_sprite.play(idle_animation_string)
+		right_hand_node.position = idle_right_hand_position
 		return
 
 	if abs(input_direction.x) > abs(input_direction.y):
 		if input_direction.x > 0:
 			animated_player_sprite.play(walk_right_animation_string)
 			idle_animation_string = "idle_right"
+			idle_right_hand_position = right_hand_offsets_facing_sideways[0]
 		else:
 			animated_player_sprite.play(walk_left_animation_string)
 			idle_animation_string = "idle_left"
+			idle_right_hand_position = right_hand_offsets_facing_sideways[0]
 	else:
 		if input_direction.y > 0:
 			animated_player_sprite.play(walk_down_animation_string)
@@ -74,8 +101,9 @@ func update_player_sprite_direction(input_direction: Vector2):
 			idle_animation_string = "idle_up"
 
 func _physics_process(_delta):
-	get_input()
-	move_and_slide()
+	if player_can_move:
+		get_input()
+		move_and_slide()
 
 
 func _unhandled_input(_event):
@@ -94,6 +122,16 @@ func _unhandled_input(_event):
 	if attack_pressed:
 		attack()
 
+
+func _process(_delta):
+	var frame_number = animated_player_sprite.frame
+
+	if animated_player_sprite.animation == "walk_right":
+		right_hand_node.position = right_hand_offsets_facing_sideways[frame_number]
+		right_hand_node.z_index = 10
+	elif animated_player_sprite.animation == "walk_left":
+		right_hand_node.position = right_hand_offsets_facing_sideways[frame_number]
+		right_hand_node.z_index = -10
 
 func attack():
 	if weapon and weapon.type != "meele":
