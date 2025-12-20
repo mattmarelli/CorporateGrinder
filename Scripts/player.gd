@@ -19,17 +19,16 @@ var min_zoom = 0.5
 var camera_zoom_amount = 0.1
 var walking_to_position = Vector2.ZERO
 var last_position = Vector2.ZERO
+var current_direction = "down"
+var need_to_sync_walking_animation = false
 var player_can_move = false
 
 var weapon = null
 var base_damage = 5.0
+var is_basic_attacking = false
 
 var idle_upper_animation_string = ""
 var idle_lower_animation_string = ""
-var walk_up_animation_string = ""
-var walk_down_animation_string = ""
-var walk_left_animation_string = ""
-var walk_right_animation_string = ""
 
 var idle_right_hand_position = Vector2.ZERO
 
@@ -52,13 +51,10 @@ func _ready():
 	attack_area.body_entered.connect(_on_attack_area_entered)
 	idle_upper_animation_string = "idle_down"
 	idle_lower_animation_string = "idle_down"
-	walk_up_animation_string = "walk_up"
-	walk_down_animation_string = "walk_down"
-	walk_right_animation_string = "walk_right"
-	walk_left_animation_string = "walk_left"
 	animated_upper_sprite.play(idle_upper_animation_string)
 	animated_lower_sprite.play(idle_lower_animation_string)
-	
+	animated_upper_sprite.animation_finished.connect(upper_sprite_animation_finished)
+
 	await get_tree().create_timer(0.1).timeout
 	player_can_move = true
 
@@ -91,7 +87,8 @@ func get_input():
 
 func update_player_sprite_direction(input_direction: Vector2):
 	if input_direction == Vector2.ZERO:
-		animated_upper_sprite.play(idle_upper_animation_string)
+		if not is_basic_attacking:
+			animated_upper_sprite.play(idle_upper_animation_string)
 		animated_lower_sprite.play(idle_lower_animation_string)
 		right_hand_node.position = idle_right_hand_position
 		return
@@ -111,10 +108,28 @@ func update_player_sprite_direction(input_direction: Vector2):
 		else:
 			direction = "up"
 
-	animated_upper_sprite.play("walk_" + direction)
+	var lower_current_frame = animated_lower_sprite.get_frame()
+	var lower_current_progress = animated_lower_sprite.get_frame_progress()
 	animated_lower_sprite.play("walk_" + direction)
+	animated_lower_sprite.set_frame_and_progress(lower_current_frame, lower_current_progress)
+
+	var upper_current_frame = animated_upper_sprite.get_frame()
+	var upper_current_progress = animated_upper_sprite.get_frame_progress()
+	if not is_basic_attacking:
+		animated_upper_sprite.play("walk_" + direction)
+		if need_to_sync_walking_animation:
+			upper_current_frame = lower_current_frame
+			upper_current_progress = lower_current_progress
+			need_to_sync_walking_animation = false
+	elif is_basic_attacking:
+		animated_upper_sprite.play("basic_attack_" + direction)
+
+	animated_upper_sprite.set_frame_and_progress(upper_current_frame, upper_current_progress)
+
 	idle_upper_animation_string = "idle_" + direction
 	idle_lower_animation_string = "idle_" + direction
+	
+	current_direction = direction
 
 	if weapon:
 		weapon.update_sprite(direction)
@@ -139,7 +154,7 @@ func _unhandled_input(_event):
 		if player_cam.zoom > Vector2(min_zoom, min_zoom):
 			player_cam.zoom = player_cam.zoom - Vector2(camera_zoom_amount, camera_zoom_amount)
 
-	if attack_pressed:
+	if attack_pressed and not is_basic_attacking:
 		attack()
 
 
@@ -163,6 +178,9 @@ func _process(_delta):
 			weapon.z_index = -10
 
 func attack():
+	is_basic_attacking = true
+	animated_upper_sprite.play("basic_attack_" + current_direction)
+
 	if weapon and weapon.type != "meele":
 		weapon.attack()
 	else:
@@ -175,3 +193,9 @@ func _on_attack_area_entered(body):
 	var enemy = body
 	if enemy.is_in_group("enemy") and enemy.has_method("take_damage"):
 		enemy.take_damage(base_damage)
+
+
+func upper_sprite_animation_finished():
+	if animated_upper_sprite.animation.begins_with("basic_attack"):
+		is_basic_attacking = false
+		need_to_sync_walking_animation = true
