@@ -6,6 +6,7 @@ var weapon_scene = preload("res://Scenes/weapon.tscn")
 
 @onready var player_cam = $PlayerCamera
 @onready var attack_area = $AttackArea
+@onready var attack_collision = $AttackArea/AttackCollision
 @export var speed = 400
 @onready var player_collision_shape = $PlayerCollisionShape
 @onready var right_hand_node = $RightHandNode
@@ -85,6 +86,72 @@ var right_hand_offsets_attacking_down = {
 	4: Vector2(3, 2),
 	5: Vector2(3, 9),
 	6: Vector2(3, 16),
+}
+
+var attack_collision_coordinates = {
+	"right": {
+		"x": 57.25,
+		"y": -0.5,
+		"rotation": 0,
+	},
+	"left": {
+		"x": -57.25,
+		"y": -0.5,
+		"rotation": 0,
+	},
+	"up": {
+		"x": 0,
+		"y": -91,
+		"rotation": 90,
+	},
+	"down": {
+		"x": 0,
+		"y": 90,
+		"rotation": 90,
+	}
+}
+
+var attack_area_display_coordinates = {
+	"right": {
+		"size": {
+			"x": 51,
+			"y": 129,
+		},
+		"position": {
+			"x": 32,
+			"y": -65,
+		}
+	},
+	"left": {
+		"size": {
+			"x": 51,
+			"y": 129,
+		},
+		"position": {
+			"x": -83,
+			"y": -65,
+		}
+	},
+	"up": {
+		"size": {
+			"x": 129,
+			"y": 51,
+		},
+		"position": {
+			"x": -64,
+			"y": -116.5,
+		}
+	},
+	"down": {
+		"size": {
+			"x": 129,
+			"y": 51,
+		},
+		"position": {
+			"x": -64,
+			"y": 64,
+		}
+	}
 }
 
 func _ready():
@@ -182,6 +249,7 @@ func _physics_process(_delta):
 	if player_can_move:
 		get_input()
 		move_and_slide()
+	set_attack_area_position()
 
 
 func _unhandled_input(_event):
@@ -268,3 +336,13 @@ func prevent_player_movement(time):
 	player_can_move = false
 	await get_tree().create_timer(time).timeout
 	player_can_move = true
+
+func set_attack_area_position():
+	var attack_collision_dimensions = attack_collision_coordinates[current_direction]
+	var attack_area_dimensions = attack_area_display_coordinates[current_direction]
+	
+	attack_collision.position = Vector2(attack_collision_dimensions["x"], attack_collision_dimensions["y"])
+	attack_collision.rotation = attack_collision_dimensions["rotation"]
+	
+	attack_area_display.size = Vector2(attack_area_dimensions["size"]["x"], attack_area_dimensions["size"]["y"])
+	attack_area_display.position = Vector2(attack_area_dimensions["position"]["x"], attack_area_dimensions["position"]["y"])

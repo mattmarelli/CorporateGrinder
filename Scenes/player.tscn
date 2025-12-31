@@ -43,12 +43,13 @@ position = Vector2(-5, 13)
 [node name="AttackArea" type="Area2D" parent="."]
 
 [node name="AttackCollision" type="CollisionShape2D" parent="AttackArea"]
-position = Vector2(57.25, -0.5)
+position = Vector2(0, 90)
+rotation = 1.5707964
 shape = SubResource("RectangleShape2D_v0iea")
 
 [node name="AttackAreaDisplay" type="ColorRect" parent="AttackArea"]
-offset_left = 32.0
-offset_top = -65.0
-offset_right = 83.0
-offset_bottom = 64.0
+offset_left = -64.0
+offset_top = 64.0
+offset_right = 65.0
+offset_bottom = 115.0
 color = Color(1, 0, 0, 0.5019608)
