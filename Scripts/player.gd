@@ -11,6 +11,7 @@ var weapon_scene = preload("res://Scenes/weapon.tscn")
 @onready var right_hand_node = $RightHandNode
 @onready var animated_upper_sprite = $AnimatedUpperSprite
 @onready var animated_lower_sprite = $AnimatedLowerSprite
+@onready var attack_area_display = $AttackArea/AttackAreaDisplay
 
 
 var character_type = ""
@@ -44,19 +45,60 @@ var right_hand_offsets_facing_sideways = {
 	8: Vector2(3, 15),
 }
 
+var right_hand_offsets_attacking_right = {
+	0: Vector2(3, 15),
+	1: Vector2(10, 12),
+	2: Vector2(25, 5),
+	3: Vector2(32, -5),
+	4: Vector2(25, 5),
+	5: Vector2(10, 12),
+	6: Vector2(3, 15),
+}
+
+var right_hand_offsets_attacking_left = {
+	0: Vector2(-3, 15),
+	1: Vector2(-10, 12),
+	2: Vector2(-25, 5),
+	3: Vector2(-32, -5),
+	4: Vector2(-25, 5),
+	5: Vector2(-10, 12),
+	6: Vector2(-3, 15),
+}
+
+var right_hand_offsets_facing_down = {
+	0: Vector2(3, 16),
+	1: Vector2(3, 16),
+	2: Vector2(3, 16),
+	3: Vector2(3, 16),
+	4: Vector2(3, 16),
+	5: Vector2(3, 15),
+	6: Vector2(3, 14),
+	7: Vector2(3, 15),
+	8: Vector2(3, 16),
+}
+
+var right_hand_offsets_attacking_down = {
+	0: Vector2(3, 16),
+	1: Vector2(3, 9),
+	2: Vector2(3, 2),
+	3: Vector2(3, -5),
+	4: Vector2(3, 2),
+	5: Vector2(3, 9),
+	6: Vector2(3, 16),
+}
 
 func _ready():
 	player_cam.zoom = Vector2(0.5, 0.5)
 	attack_area.monitoring = false
 	attack_area.body_entered.connect(_on_attack_area_entered)
+	attack_area_display.visible = false
 	idle_upper_animation_string = "idle_down"
 	idle_lower_animation_string = "idle_down"
 	animated_upper_sprite.play(idle_upper_animation_string)
 	animated_lower_sprite.play(idle_lower_animation_string)
 	animated_upper_sprite.animation_finished.connect(upper_sprite_animation_finished)
 
-	await get_tree().create_timer(0.1).timeout
-	player_can_move = true
+	prevent_player_movement(0.1)
 
 	# Spawn player with weapon but will remove this from code eventually
 	weapon = weapon_scene.instantiate()
@@ -105,6 +147,7 @@ func update_player_sprite_direction(input_direction: Vector2):
 	else:
 		if input_direction.y > 0:
 			direction = "down"
+			idle_right_hand_position = right_hand_offsets_facing_down[0]
 		else:
 			direction = "up"
 
@@ -168,6 +211,22 @@ func _process(_delta):
 	elif animated_upper_sprite.animation == "walk_left":
 		right_hand_node.position = right_hand_offsets_facing_sideways[frame_number]
 		direction = "left"
+	elif animated_upper_sprite.animation == "walk_down":
+		right_hand_node.position = right_hand_offsets_facing_down[frame_number]
+		direction = "down"
+	elif animated_upper_sprite.animation == "walk_up":
+		direction = "up"
+	elif animated_upper_sprite.animation == "basic_attack_right":
+		right_hand_node.position = right_hand_offsets_attacking_right[frame_number]
+		direction = "right"
+	elif animated_upper_sprite.animation == "basic_attack_left":
+		right_hand_node.position = right_hand_offsets_attacking_left[frame_number]
+		direction = "left"
+	elif animated_upper_sprite.animation == "basic_attack_down":
+		right_hand_node.position = right_hand_offsets_attacking_down[frame_number]
+		direction = "down"
+	elif animated_upper_sprite.animation == "basic_attack_up":
+		direction = "up"
 
 	if weapon:
 		weapon.position = right_hand_node.position
@@ -185,17 +244,27 @@ func attack():
 		weapon.attack()
 	else:
 		attack_area.monitoring = true
-		await get_tree().create_timer(0.1).timeout
+		attack_area_display.visible = true
+		await animated_upper_sprite.animation_finished
+		attack_area_display.visible = false
 		attack_area.monitoring = false
 
 
 func _on_attack_area_entered(body):
 	var enemy = body
 	if enemy.is_in_group("enemy") and enemy.has_method("take_damage"):
-		enemy.take_damage(base_damage)
+		var damage = base_damage
+		if weapon:
+			damage = weapon.damage
+		enemy.take_damage(damage)
 
 
 func upper_sprite_animation_finished():
 	if animated_upper_sprite.animation.begins_with("basic_attack"):
 		is_basic_attacking = false
 		need_to_sync_walking_animation = true
+
+func prevent_player_movement(time):
+	player_can_move = false
+	await get_tree().create_timer(time).timeout
+	player_can_move = true

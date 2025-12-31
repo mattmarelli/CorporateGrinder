@@ -22,6 +22,7 @@ func create_dungeon_and_set_scene():
 	player.reparent(dungeon_node)
 	tree.root.add_child(dungeon_node)
 	tree.current_scene = dungeon_node
+	player.prevent_player_movement(0.1)
 
 	old_scene.queue_free()
 	start_enemy_spawn()

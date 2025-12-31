@@ -12,7 +12,7 @@ animations = []
 animations = []
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_v0iea"]
-size = Vector2(33, 112)
+size = Vector2(51.5, 129)
 
 [node name="Player" type="CharacterBody2D" groups=["player"]]
 script = ExtResource("1_v0iea")
@@ -43,5 +43,12 @@ position = Vector2(-5, 13)
 [node name="AttackArea" type="Area2D" parent="."]
 
 [node name="AttackCollision" type="CollisionShape2D" parent="AttackArea"]
-position = Vector2(48, 1)
+position = Vector2(57.25, -0.5)
 shape = SubResource("RectangleShape2D_v0iea")
+
+[node name="AttackAreaDisplay" type="ColorRect" parent="AttackArea"]
+offset_left = 32.0
+offset_top = -65.0
+offset_right = 83.0
+offset_bottom = 64.0
+color = Color(1, 0, 0, 0.5019608)
