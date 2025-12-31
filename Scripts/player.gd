@@ -14,7 +14,6 @@ var weapon_scene = preload("res://Scenes/weapon.tscn")
 @onready var animated_lower_sprite = $AnimatedLowerSprite
 @onready var attack_area_display = $AttackArea/AttackAreaDisplay
 
-
 var character_type = ""
 var max_zoom = 1.0
 var min_zoom = 0.5
@@ -89,22 +88,26 @@ var right_hand_offsets_attacking_down = {
 }
 
 var attack_collision_coordinates = {
-	"right": {
+	"right":
+	{
 		"x": 57.25,
 		"y": -0.5,
 		"rotation": 0,
 	},
-	"left": {
+	"left":
+	{
 		"x": -57.25,
 		"y": -0.5,
 		"rotation": 0,
 	},
-	"up": {
+	"up":
+	{
 		"x": 0,
 		"y": -91,
 		"rotation": 90,
 	},
-	"down": {
+	"down":
+	{
 		"x": 0,
 		"y": 90,
 		"rotation": 90,
@@ -112,53 +115,67 @@ var attack_collision_coordinates = {
 }
 
 var attack_area_display_coordinates = {
-	"right": {
-		"size": {
+	"right":
+	{
+		"size":
+		{
 			"x": 51,
 			"y": 129,
 		},
-		"position": {
+		"position":
+		{
 			"x": 32,
 			"y": -65,
 		}
 	},
-	"left": {
-		"size": {
+	"left":
+	{
+		"size":
+		{
 			"x": 51,
 			"y": 129,
 		},
-		"position": {
+		"position":
+		{
 			"x": -83,
 			"y": -65,
 		}
 	},
-	"up": {
-		"size": {
+	"up":
+	{
+		"size":
+		{
 			"x": 129,
 			"y": 51,
 		},
-		"position": {
+		"position":
+		{
 			"x": -64,
 			"y": -116.5,
 		}
 	},
-	"down": {
-		"size": {
+	"down":
+	{
+		"size":
+		{
 			"x": 129,
 			"y": 51,
 		},
-		"position": {
+		"position":
+		{
 			"x": -64,
 			"y": 64,
 		}
 	}
 }
 
+
 func _ready():
 	player_cam.zoom = Vector2(0.5, 0.5)
 	attack_area.monitoring = false
 	attack_area.body_entered.connect(_on_attack_area_entered)
 	attack_area_display.visible = false
+	attack_area_display.z_index = -100
 	idle_upper_animation_string = "idle_down"
 	idle_lower_animation_string = "idle_down"
 	animated_upper_sprite.play(idle_upper_animation_string)
@@ -175,7 +192,9 @@ func _ready():
 
 func get_input():
 	var distance_from_walking_position = abs(walking_to_position - self.global_position)
-	var is_character_blocked_from_moving = abs(last_position - self.global_position) < Vector2(1.0, 1.0)
+	var is_character_blocked_from_moving = (
+		abs(last_position - self.global_position) < Vector2(1.0, 1.0)
+	)
 	if distance_from_walking_position < Vector2(3.0, 3.0):
 		walking_to_position = Vector2.ZERO
 	elif is_character_blocked_from_moving:
@@ -194,6 +213,7 @@ func get_input():
 	last_position = self.global_position
 	update_player_sprite_direction(input_direction)
 
+
 func update_player_sprite_direction(input_direction: Vector2):
 	if input_direction == Vector2.ZERO:
 		if not is_basic_attacking:
@@ -201,7 +221,7 @@ func update_player_sprite_direction(input_direction: Vector2):
 		animated_lower_sprite.play(idle_lower_animation_string)
 		right_hand_node.position = idle_right_hand_position
 		return
-	
+
 	var direction = null
 
 	if abs(input_direction.x) > abs(input_direction.y):
@@ -238,7 +258,7 @@ func update_player_sprite_direction(input_direction: Vector2):
 
 	idle_upper_animation_string = "idle_" + direction
 	idle_lower_animation_string = "idle_" + direction
-	
+
 	current_direction = direction
 
 	if weapon:
@@ -298,11 +318,12 @@ func _process(_delta):
 
 	if weapon:
 		weapon.position = right_hand_node.position
-		
+
 		if direction in ["right", "down"]:
 			weapon.z_index = 10
 		elif direction in ["left", "up"]:
 			weapon.z_index = -10
+
 
 func attack():
 	is_basic_attacking = true
@@ -332,17 +353,25 @@ func upper_sprite_animation_finished():
 		is_basic_attacking = false
 		need_to_sync_walking_animation = true
 
+
 func prevent_player_movement(time):
 	player_can_move = false
 	await get_tree().create_timer(time).timeout
 	player_can_move = true
 
+
 func set_attack_area_position():
 	var attack_collision_dimensions = attack_collision_coordinates[current_direction]
 	var attack_area_dimensions = attack_area_display_coordinates[current_direction]
-	
-	attack_collision.position = Vector2(attack_collision_dimensions["x"], attack_collision_dimensions["y"])
+
+	attack_collision.position = Vector2(
+		attack_collision_dimensions["x"], attack_collision_dimensions["y"]
+	)
 	attack_collision.rotation = attack_collision_dimensions["rotation"]
-	
-	attack_area_display.size = Vector2(attack_area_dimensions["size"]["x"], attack_area_dimensions["size"]["y"])
-	attack_area_display.position = Vector2(attack_area_dimensions["position"]["x"], attack_area_dimensions["position"]["y"])
+
+	attack_area_display.size = Vector2(
+		attack_area_dimensions["size"]["x"], attack_area_dimensions["size"]["y"]
+	)
+	attack_area_display.position = Vector2(
+		attack_area_dimensions["position"]["x"], attack_area_dimensions["position"]["y"]
+	)

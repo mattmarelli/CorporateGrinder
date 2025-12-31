@@ -25,10 +25,10 @@ var select_character_three_button = $SelectCharacterCanvasLayer/SelectCharacterP
 var select_character_four_button = $SelectCharacterCanvasLayer/SelectCharacterPanelContainer/SelectCharacterVBoxContainer/SelectCharacterFourButton
 @onready
 var select_character_five_button = $SelectCharacterCanvasLayer/SelectCharacterPanelContainer/SelectCharacterVBoxContainer/SelectCharacterFiveButton
-@onready var selected_character_texture_rect = $SelectCharacterCanvasLayer/SelectCharacterPanelContainer/SelectCharacterVBoxContainer/HBoxContainer/SelectedCharacterTextureRect
-@onready var selected_character_label = $SelectCharacterCanvasLayer/SelectCharacterPanelContainer/SelectCharacterVBoxContainer/HBoxContainer/SelectedCharacterLabel
-
-
+@onready
+var selected_character_texture_rect = $SelectCharacterCanvasLayer/SelectCharacterPanelContainer/SelectCharacterVBoxContainer/HBoxContainer/SelectedCharacterTextureRect
+@onready
+var selected_character_label = $SelectCharacterCanvasLayer/SelectCharacterPanelContainer/SelectCharacterVBoxContainer/HBoxContainer/SelectedCharacterLabel
 
 var main_game_scene = preload("res://Scenes/main_game.tscn")
 var selected_character: SavedCharacter = null
@@ -59,6 +59,7 @@ func set_up_character_select_buttons():
 		character_count += 1
 		set_up_character_select_button(character, character_count)
 
+
 func get_character_image(character_type):
 	var image = null
 
@@ -70,6 +71,7 @@ func get_character_image(character_type):
 		image = load("res://Assets/PlayerModels/Executive/ExecutiveManSkinny.png")
 
 	return image
+
 
 func set_up_character_select_button(character_save: SavedCharacter, character_slot: int):
 	var button_to_set_up = null
@@ -94,7 +96,7 @@ func set_up_character_select_button(character_save: SavedCharacter, character_sl
 		+ " Level: "
 		+ str(character_save.character_level)
 	)
-	
+
 	button_to_set_up.pressed.connect(select_character.bind(button_to_set_up))
 	button_to_set_up.show()
 
@@ -154,6 +156,7 @@ func create_character():
 
 	characters = saver_loader.load_game()
 	set_up_character_select_buttons()
+
 
 func select_character(button: Button):
 	if button == select_character_one_button:

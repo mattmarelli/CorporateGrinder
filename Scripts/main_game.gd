@@ -5,7 +5,8 @@ var manager_scene = preload("res://Scenes/manager.tscn")
 var executive_scene = preload("res://Scenes/executive.tscn")
 var dungeon_spawner_scene = preload("res://Scenes/dungeon_spawner.tscn")
 var character_save_slot = null
-var character_save:SavedCharacter = null
+var character_save: SavedCharacter = null
+
 
 func _ready():
 	var screen_rect = get_viewport().get_visible_rect()
@@ -24,5 +25,5 @@ func _ready():
 
 	var dungeon_spawner = dungeon_spawner_scene.instantiate()
 
-	dungeon_spawner.position = Vector2(screen_width/2, 50)
+	dungeon_spawner.position = Vector2(screen_width / 2, 50)
 	add_child(dungeon_spawner)

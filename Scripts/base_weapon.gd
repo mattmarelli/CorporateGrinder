@@ -12,6 +12,7 @@ var type = "meele"
 var sprite_offset_x = 5
 var sprite_offset_y = 5
 
+
 func update_sprite(direction):
 	if direction == "up":
 		weapon_sprite.texture = sprite_up
@@ -24,6 +25,7 @@ func update_sprite(direction):
 	elif direction == "left":
 		weapon_sprite.texture = sprite_left
 		weapon_sprite.offset = Vector2(-sprite_offset_x - 3, -sprite_offset_y)
+
 
 func attack():
 	pass

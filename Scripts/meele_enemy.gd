@@ -2,8 +2,10 @@ extends Enemy
 
 var speed = 150
 var player = null
-@onready var meele_enemy_animated_sprite = $MeeleEnemyAnimatedSprite
+@onready var animated_sprite_upper = $AnimatedSpriteUpper
+@onready var animated_sprite_lower = $AnimatedSpriteLower
 var idle_animation_string = "idle_down"
+
 
 func init(_health = 100):
 	super.init(_health)
@@ -20,22 +22,24 @@ func _physics_process(_delta):
 		velocity = move_direction * speed
 
 		if move_direction == Vector2.ZERO:
-			meele_enemy_animated_sprite.play(idle_animation_string)
+			animated_sprite_lower.play(idle_animation_string)
+			animated_sprite_upper.play(idle_animation_string)
 			return
+
+		var direction = null
 
 		if abs(move_direction.x) > abs(move_direction.y):
 			if move_direction.x > 0:
-				meele_enemy_animated_sprite.play("walk_right")
-				idle_animation_string = "idle_right"
+				direction = "right"
 			else:
-				meele_enemy_animated_sprite.play("walk_left")
-				idle_animation_string = "idle_left"
+				direction = "left"
 		else:
 			if move_direction.y > 0:
-				meele_enemy_animated_sprite.play("walk_down")
-				idle_animation_string = "idle_down"
+				direction = "down"
 			else:
-				meele_enemy_animated_sprite.play("walk_up")
-				idle_animation_string = "idle_up"
-
+				direction = "up"
+		
+		idle_animation_string = "idle_" + direction
+		animated_sprite_upper.play("walk_" + direction)
+		animated_sprite_lower.play("walk_" + direction)
 		move_and_slide()
