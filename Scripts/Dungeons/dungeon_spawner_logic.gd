@@ -1,6 +1,6 @@
 extends Node
 
-var enemy_spawner_script = preload("res://Scripts/enemy_spawner.gd")
+var enemy_spawner_script = preload("res://Scripts/Enemies/enemy_spawner.gd")
 var enemy_spawner = null
 var enemy_spawner_timer = Timer.new()
 
@@ -29,7 +29,6 @@ func create_dungeon_and_set_scene():
 
 
 func start_enemy_spawn():
-	print("THIS IS CALLED!!!")
-	enemy_spawner_timer.wait_time = 10.0
+	enemy_spawner_timer.wait_time = 0.5
 	enemy_spawner_timer.one_shot = false
 	enemy_spawner_timer.start()

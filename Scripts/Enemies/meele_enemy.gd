@@ -38,7 +38,7 @@ func _physics_process(_delta):
 				direction = "down"
 			else:
 				direction = "up"
-		
+
 		idle_animation_string = "idle_" + direction
 		animated_sprite_upper.play("walk_" + direction)
 		animated_sprite_lower.play("walk_" + direction)

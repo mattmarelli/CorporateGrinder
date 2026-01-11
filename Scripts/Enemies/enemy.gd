@@ -24,7 +24,7 @@ func take_damage(damage):
 
 
 func drop_loot():
-	pass
+	LootSpawner.spawn_loot(self)
 
 
 func despawn():

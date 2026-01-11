@@ -1,17 +1,38 @@
-[gd_scene load_steps=3 format=3 uid="uid://cdx5tkjut4ef3"]
+[gd_scene load_steps=4 format=3 uid="uid://cdx5tkjut4ef3"]
 
-[ext_resource type="Script" uid="uid://btxwlpk6mwwhh" path="res://Scripts/base_weapon.gd" id="1_er6cq"]
+[ext_resource type="Script" uid="uid://btxwlpk6mwwhh" path="res://Scripts/Items/Weapons/base_weapon.gd" id="1_er6cq"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_17xbw"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_er6cq"]
+radius = 86.28442
 
 [node name="Weapon" type="Node2D"]
 script = ExtResource("1_er6cq")
 
-[node name="Area2D" type="Area2D" parent="."]
+[node name="WeaponArea" type="Area2D" parent="."]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+[node name="WeaponCollisionShape" type="CollisionShape2D" parent="WeaponArea"]
 shape = SubResource("RectangleShape2D_17xbw")
 
 [node name="WeaponSprite" type="Sprite2D" parent="."]
 scale = Vector2(2, 2)
 offset = Vector2(5, -5)
+
+[node name="NameContainer" type="PanelContainer" parent="."]
+visible = false
+offset_left = -59.0
+offset_top = -45.0
+offset_right = 59.0
+offset_bottom = -11.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="NameLabel" type="Label" parent="NameContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="PickupArea" type="Area2D" parent="."]
+
+[node name="PickupCollisionShape" type="CollisionShape2D" parent="PickupArea"]
+shape = SubResource("CircleShape2D_er6cq")

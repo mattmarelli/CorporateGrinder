@@ -15,6 +15,12 @@ run/main_scene="uid://c0a7j553ux1og"
 config/features=PackedStringArray("4.5", "Forward Plus")
 config/icon="res://icon.svg"
 
+[autoload]
+
+LootSpawner="*res://Scripts/LootSpawn/loot_spawner.gd"
+ItemSpawner="*res://Scripts/LootSpawn/item_spawner.gd"
+ShareSpawner="*res://Scripts/LootSpawn/share_spawner.gd"
+
 [display]
 
 window/size/viewport_width=1920

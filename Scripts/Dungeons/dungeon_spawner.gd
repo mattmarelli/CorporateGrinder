@@ -3,7 +3,7 @@ extends Node2D
 @onready var dungeon_body = $DungeonSpawnerStaticBody
 @onready var spawn_dungeon_canvas_layer = $DungeonSpawnerCreateDungeonCanvasLayer
 @onready var dungeon_spawner_interation_panel = $DungeonSpawnerInteractPanelContainer
-var dungeon_spawner_logic_script = preload("res://Scripts/dungeon_spawner_logic.gd")
+var dungeon_spawner_logic_script = preload("res://Scripts/Dungeons/dungeon_spawner_logic.gd")
 var dungeon_spawner_logic = null
 
 var player_in_interactable_area = false

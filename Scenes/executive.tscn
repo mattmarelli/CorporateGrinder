@@ -1,7 +1,7 @@
 [gd_scene load_steps=125 format=3 uid="uid://csoovudmq3i5r"]
 
 [ext_resource type="PackedScene" uid="uid://b3aqca0hyv0h6" path="res://Scenes/player.tscn" id="1_707pi"]
-[ext_resource type="Script" uid="uid://ph4af72bfehx" path="res://Scripts/executive.gd" id="2_mujih"]
+[ext_resource type="Script" uid="uid://ph4af72bfehx" path="res://Scripts/Players/executive.gd" id="2_mujih"]
 [ext_resource type="Texture2D" uid="uid://nq32kymv1aew" path="res://Assets/PlayerModels/Executive/ExecutiveBasicAttackDown.png" id="3_7shd7"]
 [ext_resource type="Texture2D" uid="uid://dh7an3hj0p77n" path="res://Assets/PlayerModels/Executive/ExecutiveWalkingDownLower.png" id="3_khk4x"]
 [ext_resource type="Texture2D" uid="uid://dvctq2e3nm7ot" path="res://Assets/PlayerModels/Executive/ExecutiveWalkingDownUpper.png" id="4_840xi"]

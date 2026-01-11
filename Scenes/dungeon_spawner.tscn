@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://cwpm5ngonvdf1"]
 
-[ext_resource type="Script" uid="uid://dv1sts3ci0hxk" path="res://Scripts/dungeon_spawner.gd" id="1_dw2up"]
+[ext_resource type="Script" uid="uid://dv1sts3ci0hxk" path="res://Scripts/Dungeons/dungeon_spawner.gd" id="1_dw2up"]
 [ext_resource type="Texture2D" uid="uid://cxn327ciskiuc" path="res://Assets/PlayerModels/MainGame/JobBoard.png" id="2_a522y"]
 [ext_resource type="Theme" uid="uid://csjc0hy4ae4h5" path="res://Themes/base_game_theme.tres" id="2_sggio"]
 

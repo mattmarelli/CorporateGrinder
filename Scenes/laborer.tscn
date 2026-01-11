@@ -1,7 +1,7 @@
 [gd_scene load_steps=125 format=3 uid="uid://b8nqftpeg5xpl"]
 
 [ext_resource type="PackedScene" uid="uid://b3aqca0hyv0h6" path="res://Scenes/player.tscn" id="1_qco2a"]
-[ext_resource type="Script" uid="uid://cods3cc5hwst3" path="res://Scripts/laborer.gd" id="2_xtks3"]
+[ext_resource type="Script" uid="uid://cods3cc5hwst3" path="res://Scripts/Players/laborer.gd" id="2_xtks3"]
 [ext_resource type="Texture2D" uid="uid://8fmky0tqy101" path="res://Assets/PlayerModels/Laborer/LaborerWalkingDownLower.png" id="3_ho6bv"]
 [ext_resource type="Texture2D" uid="uid://dpaitm0xegdtc" path="res://Assets/PlayerModels/Laborer/LaborerBasicAttackDown.png" id="3_kbay0"]
 [ext_resource type="Texture2D" uid="uid://b3votxa0a5f3v" path="res://Assets/PlayerModels/Laborer/LaborerBasicAttackLeft.png" id="4_6ch70"]

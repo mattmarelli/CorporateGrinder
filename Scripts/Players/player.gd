@@ -28,8 +28,8 @@ var weapon = null
 var base_damage = 5.0
 var is_basic_attacking = false
 
-var idle_upper_animation_string = ""
-var idle_lower_animation_string = ""
+var idle_upper_animation_string = "idle_down"
+var idle_lower_animation_string = "idle_down"
 
 var idle_right_hand_position = Vector2.ZERO
 

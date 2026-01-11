@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=3 uid="uid://b7f4hrwusfhag"]
 
 [ext_resource type="Texture2D" uid="uid://cbkfkorpvcba0" path="res://Assets/HealthBarUnder.png" id="1_4o665"]
-[ext_resource type="Script" uid="uid://bvkay7ox7nij3" path="res://Scripts/meele_enemy.gd" id="1_tq82f"]
+[ext_resource type="Script" uid="uid://bvkay7ox7nij3" path="res://Scripts/Enemies/meele_enemy.gd" id="1_tq82f"]
 [ext_resource type="Texture2D" uid="uid://ddad3inlqrqo" path="res://Assets/HealthBarOver.png" id="2_tq82f"]
 [ext_resource type="Texture2D" uid="uid://cl0efvnmww8sh" path="res://Assets/HealthBarProgress.png" id="3_xuf4y"]
 
